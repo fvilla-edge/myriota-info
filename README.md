@@ -13,7 +13,6 @@ El demo:
 - procesa downlinks por URC,
 - permite configurar runtime y persistir configuracion (`cfg period`, `cfg gnss_fix`).
 
-Referencia funcional base: `README.md`.
 
 ## 2) Estructura del sample y rol de archivos
 
@@ -126,33 +125,6 @@ Comportamiento:
 - **Cambiar politica GNSS o timeouts**: `src/app_gnss.c`.
 - **Procesar nuevas URC**: `src/modem_urc.c`.
 - **Modificar señales LED/ahorro de energia/hardware**: `src/hardware_controls.c` + overlays de board.
-
-## 8) Riesgos al modificar
-
-- Desalinear payload C vs parsers externos.
-- Romper parseo de URCs/AT por cambios de formato.
-- Problemas de timing/concurrencia en cola GNSS (size 1, ultimo valor).
-- Romper almacenamiento/provisioning al tocar `pm_static.yml`.
-- Dependencias por board en DeviceTree aliases/chosen.
-- Consumo excesivo con periodos cortos + `gnss_fix=1`.
-
-## 9) Checklist de validacion despues de cambios
-
-1. Boot esperado y secuencia LED correcta.
-2. `cfg period` y `cfg gnss_fix` funcionan y persisten tras reboot.
-3. Cadencia de uplinks consistente con `period`.
-4. URCs `#MLOCATION` y `#MRECV` siguen procesando sin errores.
-5. Payload hex loggeado decodifica correctamente con `unpack.py`.
-6. Sin errores AT recurrentes (`AT command failed`, parse errors, `-ENOBUFS`).
-7. Build/flash/provisioning coherente para la board usada.
-
-## 10) Estrategia recomendada para primeras modificaciones
-
-Orden sugerido para reducir riesgo:
-
-1. ajustar solo `cfg period` / `cfg gnss_fix` y validar,
-2. agregar un unico campo nuevo en payload + actualizar parsers,
-3. despues tocar URCs o particiones/memoria si hace falta.
 
 ---
 
