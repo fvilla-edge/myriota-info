@@ -1,10 +1,6 @@
 # Playbook de modificaciones (`samples/demo`)
 
-## Regla base antes de tocar nada
-
-1. Cambia una sola cosa por vez.
-2. Compila y valida despues de cada cambio.
-3. Si tocas payload, actualiza siempre parsers (`parser.js`, `unpack.py`).
+Si se toca payload, actualizar siempre parsers (`parser.js`, `unpack.py`).
 
 ---
 
@@ -21,7 +17,7 @@ Objetivo ejemplo: agregar `gnss_accuracy` al mensaje uplink.
 
 ### Paso 1 - Extender struct en C
 
-En `src/periodic_uplink.c`, agrega el campo al final de `struct uplink_message_t`.
+En `src/periodic_uplink.c`, agregar el campo al final de `struct uplink_message_t`.
 
 Recomendacion: agregar al final minimiza riesgo de romper offsets previos durante pruebas iniciales.
 
@@ -35,7 +31,7 @@ En `populate_uplink_message(...)`, setea el valor desde la fuente correcta:
 ### Paso 3 - Validar tamaño total
 
 El mensaje cambia de longitud.  
-Asegurate que:
+Asegurar que:
 
 - sigue siendo `<= MODEM_UPLINK_MSG_SIZE`,
 - la impresion hex y `AT#MSEND=<len>` usan el nuevo `sizeof(msg)` correcto.
@@ -44,16 +40,16 @@ Asegurate que:
 
 En `unpack.py`:
 
-- actualiza `MESSAGE_FORMAT` para incluir el nuevo tipo,
-- extrae el campo nuevo en el unpack,
-- agrega el valor al JSON de salida.
+- actualizar `MESSAGE_FORMAT` para incluir el nuevo tipo,
+- extraer el campo nuevo en el unpack,
+- agregar el valor al JSON de salida.
 
 ### Paso 5 - Actualizar `parser.js`
 
 En `parser.js`:
 
-- agrega lectura con offset correcto (`readInt8`, `readUInt8`, `readInt16LE`, etc.),
-- agrega variable al array `data`.
+- agregar lectura con offset correcto (`readInt8`, `readUInt8`, `readInt16LE`, etc.),
+- agregar variable al array `data`.
 
 ### Paso 6 - Validacion minima
 
@@ -80,9 +76,9 @@ Objetivo ejemplo: `cfg temp_enable <0|1>` para habilitar/deshabilitar envio de t
 
 En `configuration.c`:
 
-- agrega sub-key settings (ej. `temp_enable`),
-- agrega variable estatica con default (ej. `true`),
-- agrega mutex si corresponde.
+- agregar sub-key settings (ej. `temp_enable`),
+- agregar variable estatica con default (ej. `true`),
+- agregar mutex si corresponde.
 
 ### Paso 2 - Persistencia settings
 
@@ -157,7 +153,6 @@ Si parse falla:
 
 ## Plantilla de pruebas rapidas por cada cambio
 
-Usa esta mini-rutina siempre:
 
 1. Build limpio (`--pristine`).
 2. Flash y boot completo.
