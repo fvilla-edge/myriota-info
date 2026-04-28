@@ -1,10 +1,7 @@
-# Playbook de modificaciones (`samples/demo`)
-
-Si se toca payload, actualizar siempre parsers (`parser.js`, `unpack.py`).
 
 ---
 
-## Receta 1: Agregar un campo nuevo al payload
+## 1: Agregar un campo nuevo al payload
 
 Objetivo ejemplo: agregar `gnss_accuracy` al mensaje uplink.
 
@@ -13,13 +10,11 @@ Objetivo ejemplo: agregar `gnss_accuracy` al mensaje uplink.
 - `src/periodic_uplink.c`
 - `parser.js`
 - `unpack.py`
-- opcional: `README.md` (tabla de payload)
 
 ### Paso 1 - Extender struct en C
 
 En `src/periodic_uplink.c`, agregar el campo al final de `struct uplink_message_t`.
 
-Recomendacion: agregar al final minimiza riesgo de romper offsets previos durante pruebas iniciales.
 
 ### Paso 2 - Poblar el nuevo campo
 
@@ -62,7 +57,7 @@ Checklist:
 
 ---
 
-## Receta 2: Agregar un nuevo parametro de configuracion `cfg`
+## 2: Agregar un nuevo parametro de configuracion `cfg`
 
 Objetivo ejemplo: `cfg temp_enable <0|1>` para habilitar/deshabilitar envio de temperatura.
 
@@ -112,7 +107,7 @@ En `periodic_uplink.c`, usar el getter:
 
 ---
 
-## Receta 3: Agregar soporte para una nueva URC
+## 3: Agregar soporte para una nueva URC
 
 Objetivo ejemplo: procesar `#MALERT:`.
 

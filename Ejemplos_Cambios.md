@@ -77,15 +77,11 @@ Agregar lectura por offset (el offset depende del orden exacto del struct). Si e
 
 **Importante:** si se usa `readInt16LE` para batería en tu copia, los offsets cambian. Siempre recalcular offsets con el struct final.
 
-### A4) README (opcional)
-
-En la tabla “Message Payload Format” de `README.md`, agregar una fila para el nuevo byte y el significado del sentinel (`INT8_MIN` = sin dato).
-
 ---
 
 ## Ejemplo B: nuevo comando `cfg` persistente (habilitar humedad en uplink)
 
-Objetivo: `cfg humidity <0|1>` para no leer el sensor si no hace falta (ahorro).
+Objetivo: `cfg humidity <0|1>` para no leer el sensor si no hace falta.
 
 ### B1) `src/configuration.c`
 

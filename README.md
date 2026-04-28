@@ -1,7 +1,3 @@
-# Guia completa de `samples/demo`
-
-Este documento resume todo lo necesario para entender y modificar el ejemplo `demo` de HyperPulse sin romper comportamiento.
-
 ## 1) Que hace este sample
 
 El demo:
